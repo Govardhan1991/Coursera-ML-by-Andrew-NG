@@ -33,11 +33,15 @@ X = [ones(m, 1) X];
 classlabels = zeros(num_labels, 1);
 for i=1:m
     for j=1:num_labels
-        classlabels(j) = sum(all_theta(j,:).*X(i,:));
+        
     end
-    [~, index] = max(classlabels);
-    p(i) = index;
 end
+
+
+
+
+
+
 
 % =========================================================================
 

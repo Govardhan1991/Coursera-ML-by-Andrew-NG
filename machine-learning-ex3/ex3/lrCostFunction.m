@@ -36,19 +36,27 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
-temp = sigmoid(X*theta);
-%J = 1/m * sum(-1*y.*log(sigmoid(sum(theta'.*X,2)))-(1-y).*log(1-sigmoid(sum(theta'.*X, 2))))+lambda/(2*m)*(theta(2:length(theta))'*theta(2:length(theta)));
-J = 1/m * sum(-1*y.*log(temp)-(1-y).*log(1-temp))+lambda/(2*m)*(theta(2:length(theta))'*theta(2:length(theta)));
-
-%grad = 1/m*sum((temp-y).*X, 1);
-grad = 1/m*(X'*(temp-y));
-
-tempReg = theta;
-tempReg(1)=0;
-
-grad = grad + lambda*tempReg/m;
+% temp = sigmoid(X*theta);
+% %J = 1/m * sum(-1*y.*log(sigmoid(sum(theta'.*X,2)))-(1-y).*log(1-sigmoid(sum(theta'.*X, 2))))+lambda/(2*m)*(theta(2:length(theta))'*theta(2:length(theta)));
+% %J = 1/m * sum(-1*y.*log(temp)-(1-y).*log(1-temp))+lambda/(2*m)*(theta(2:length(theta))'*theta(2:length(theta)));
+% J = 1/m * sum(-1*y.*log(sigmoid(sum(theta'.*X,2)))-(1-y).*log(1-sigmoid(sum(theta'.*X, 2))))+lambda/(2*m)*(theta(2:length(theta))'*theta(2:length(theta)));
+% 
+% %grad = 1/m*sum((temp-y).*X, 1);
+% grad = 1/m*(X'*(temp-y));
+% 
+% tempReg = theta;
+% tempReg(1)=0;
+% 
+% grad = grad + lambda*tempReg/m;
 
 % =============================================================
+J = 1/m * sum(-1*y.*log(sigmoid(sum(theta'.*X,2)))-(1-y).*log(1-sigmoid(sum(theta'.*X, 2))))+lambda/(2*m)*(theta(2:length(theta))'*theta(2:length(theta)));
+
+grad(1) = 1/m*sum((sigmoid(sum(theta'.*X,2))-y).*X(:,1));
+
+for j = 2:n
+    grad(j) = 1/m*sum((sigmoid(sum(theta'.*X,2))-y).*X(:,j))+lambda*theta(j)/m;
+end
 
 grad = grad(:);
 
