@@ -26,8 +26,6 @@ a2 = size(Theta2, 1);
 X = [ones(m, 1) X];
 %a2 = sigmoid(sum(X.*Theta1',2));
 
-k=sum(X.*Theta1(1,:),2)
-a=1;
 %classlabels = zeros(num_labels, 1);
 for i=1:m
     for j=1:size(Theta1, 1)
